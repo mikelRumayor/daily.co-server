@@ -1,7 +1,10 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 
 const rooms = require('./routes/rooms')
+
+app.use(cors())
 
 const router = new express.Router();
 
