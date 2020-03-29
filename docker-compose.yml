@@ -1,7 +1,6 @@
 version: '3'
  
 services:
- 
     influxdb:
         build:
             context: ./docker/influxdb
@@ -9,8 +8,7 @@ services:
         ports:
             - 8086:8086
             - 8083:8083
-        volumes:
-          - ./var/docker/data/influxdb:/var/lib/influxdb:cached
+       
         environment:
             INFLUXDB_USER: influxdb
             INFLUXDB_USER_PASSWORD: influxdb
