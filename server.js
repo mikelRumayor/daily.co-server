@@ -5,7 +5,7 @@ const cors = require('cors')
 
 const database = require('./providers/database')
 
-
+const meetings = require('./routes/meetings')
 const rooms = require('./routes/rooms')
 const stats = require('./routes/stats')
 
@@ -14,6 +14,7 @@ app.use(bodyParser.json())
 
 const router = new express.Router();
 
+router.use(meetings)
 router.use(rooms)
 router.use(stats)
 

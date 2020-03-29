@@ -1,22 +1,23 @@
 const router = require('express').Router()
 const rest = require('../providers/rest');
 
+const tranform = ({ id, name, ...room}) => ({ ...room, id: name, name }) 
+
 router
   .get('/rooms', async (req, res) => {
     try {
       const { data: rooms } = await rest.read('/rooms')
       res.header("Content-Type",'application/json');
-      res.send(JSON.stringify(rooms, null, 2))
+      res.send(JSON.stringify(rooms.map(tranform), null, 2))
     } catch(e) {
       res.status(500)
     }
   })
   .post('/rooms', async (req, res) => {
     try {
-      let room = await rest.create('/rooms', req.body)
-      room = {...room, id: room.name }
+      const room = await rest.create('/rooms', req.body)
       res.header("Content-Type",'application/json');
-      res.send(JSON.stringify(room, null, 2))
+      res.send(JSON.stringify(tranform(room), null, 2))
     } catch(e) {
       res.status(500)
     }
@@ -25,7 +26,7 @@ router
     try {
       const room = await rest.read(`/rooms/${id}`)
       res.header("Content-Type",'application/json');
-      res.send(JSON.stringify(room, null, 2))
+      res.send(JSON.stringify(tranform(room), null, 2))
     } catch(e) {
       res.status(500)
     }
