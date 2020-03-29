@@ -7,7 +7,7 @@ const database = new Influx.InfluxDB({
   username: process.env.USERNAME,
   password: process.env.PASSWORD,
   host: process.env.DATABASE_URL,
-  port: process.env.PORT,
+  port: process.env.DATABASE_PORT,
   url: process.env.DATABASE_URL,
   token: process.env.TOKEN,
   schema: [model]
