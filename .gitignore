@@ -3,3 +3,5 @@
 
 # OS (Should be on your config! ¬¬)
 .DS_Store
+
+.env
