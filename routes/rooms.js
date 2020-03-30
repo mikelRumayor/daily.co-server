@@ -10,6 +10,7 @@ router
       res.header("Content-Type",'application/json');
       res.send(JSON.stringify(rooms.map(tranform), null, 2))
     } catch(e) {
+      console.log(e)
       res.status(500)
     }
   })
@@ -18,6 +19,15 @@ router
       const room = await rest.create('/rooms', req.body)
       res.header("Content-Type",'application/json');
       res.send(JSON.stringify(tranform(room), null, 2))
+    } catch(e) {
+      res.status(500)
+    }
+  })
+  .get('/rooms/token', async (req, res) => {
+    try {
+      const { data: rooms } = await rest.read('/meeting-tokens/token')
+      res.header("Content-Type",'application/json');
+      res.send(JSON.stringify(rooms.map(tranform), null, 2))
     } catch(e) {
       res.status(500)
     }
