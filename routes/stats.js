@@ -10,18 +10,23 @@ router
       const records = await database.query(`
         select * from metrics
         where id = ${Influx.escape.stringLit(id)}
+        group by participantId
         order by time asc
       `)
-      console.log(records)
+      const series = {}
+      records.forEach(({ participantId, ...rest}) => {
+        if(!series[participantId]) series[participantId] = []
+        series[participantId].push(rest)
+      })
       res.header("Content-Type",'application/json');
-      res.json(records)
+      res.json(series)
     } catch(e) {
       console.log(e)
       res.status(500)
     }
   })
-  .post('/stats/:id', async (req, res) => {
-    const { params: { id }} = req;
+  .post('/stats/:id/:participantId', async (req, res) => {
+    const { params: { id, participantId }} = req;
 
     const { body: {
       timestamp,
@@ -34,7 +39,7 @@ router
       await database.writePoints([
         {
           measurement: 'metrics',
-          tags: { id },
+          tags: { id, participantId },
           fields: {
             videoRecvBitsPerSecond,
             videoSendBitsPerSecond,
@@ -62,8 +67,5 @@ router
       res.status(500)
     }
   })
-  
-  
-
 
   module.exports = router;

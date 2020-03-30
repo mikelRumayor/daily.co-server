@@ -8,5 +8,5 @@ module.exports = {
     videoRecvPacketLoss: Influx.FieldType.INTEGER,
     videoSendPacketLoss: Influx.FieldType.INTEGER,
   },
-  tags: ['id']
+  tags: ['id', 'participantId']
 }

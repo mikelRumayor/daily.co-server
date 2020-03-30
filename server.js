@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const fallback = require('express-history-api-fallback');
 
 const database = require('./providers/database')
 
@@ -18,14 +19,13 @@ router.use(meetings)
 router.use(rooms)
 router.use(stats)
 
-app
-  .get('/', (req, res) => res.send('OK'))
-  .use('/api/v1.0', router)
+app.use('/api/v1.0', router)
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send(err);
 });
 
- 
+app.use(express.static(__dirname + '/public'));
+app.use(fallback('index.html', { root: __dirname + '/public' }))
 app.listen(process.env.PORT)
