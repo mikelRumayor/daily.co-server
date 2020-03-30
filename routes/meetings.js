@@ -2,9 +2,6 @@ const router = require('express').Router()
 const rest = require('../providers/rest');
 
 router
-  .get('/', async (req, res) => {
-    res.send('reach')
-  })
   .get('/meetings/:token', async (req, res) => {
     const { token } = req.params;
     try {
