@@ -10,7 +10,7 @@ router
       const records = await database.query(`
         select * from metrics
         where id = ${Influx.escape.stringLit(id)}
-        order by time desc
+        order by time asc
       `)
       console.log(records)
       res.header("Content-Type",'application/json');
