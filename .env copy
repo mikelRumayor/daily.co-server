@@ -1,0 +1,8 @@
+DATABASE_NAME=daily_co_metrics
+DATABASE_USERNAME=influxdb 
+DATABASE_PASSWORD=b0uczfc71aq927so 
+DATABASE_HOST=influx-2a61eccd-mikel-2533.aivencloud.com 
+DATABASE_PORT=28354
+DATABASE_PROTOCOL=https
+API_URI=https://api.daily.co/v1
+API_KEY=67b8bd92640bb58f486c13b51beade62731425698bb8234bb9acef8038c2776a

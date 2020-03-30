@@ -23,8 +23,6 @@ router
   .post('/stats/:id', async (req, res) => {
     const { params: { id }} = req;
 
-    if(!Object.keys(req.body) < 5) res.status(200)
-
     const { body: {
       timestamp,
       videoRecvBitsPerSecond,
@@ -45,7 +43,9 @@ router
            },
            timestamp
         }
-      ])
+      ],{
+        precision: 'ms',
+      })
       
       const [first] = await database.query(`
         select * from metrics
@@ -54,6 +54,7 @@ router
         limit 1
       `)
       res.header("Content-Type",'application/json');
+      console.log(first)
       res.json(first)
 
     } catch(e) {
