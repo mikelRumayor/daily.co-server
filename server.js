@@ -22,5 +22,10 @@ app
   .get('/', (req, res) => res.send('OK'))
   .use('/api/v1.0', router)
 
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send(err);
+});
+
  
 app.listen(process.env.PORT)
