@@ -10,7 +10,6 @@ router
       res.header("Content-Type",'application/json');
       res.send(JSON.stringify(rooms.map(tranform), null, 2))
     } catch(e) {
-      console.log(e)
       res.status(500)
     }
   })
