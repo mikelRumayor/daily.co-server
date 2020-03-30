@@ -15,9 +15,7 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "prestart": "docker-compose build && docker-compose up -d",
-    "start": "nodemon -r dotenv/config server.js",
-    "build": "node server.js"
+    "start": "node server.js"
   },
   "author": "mikel rumayor",
   "license": "ISC"
